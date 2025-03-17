@@ -1,47 +1,45 @@
-version: '3.8'
-
 services:
   frontend:
-    image: iemafzal/frontend:v1
+    build:
+      context: ./frontend/
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
       - backend
     networks:
-      - chat-network
-    environment:
-      - BACKEND_URL=http://backend:5001
+      - chatapp_network
 
   backend:
-    image: iemafzal/backend:v1
+    build:
+      context: ./backend/
     ports:
       - "5001:5001"
     depends_on:
       - mongo
     environment:
-      - MONGODB_URI=mongodb://root:admin@mongo:27017/chatApp?authSource=admin
       - PORT=5001
-      - NODE_ENV=production
-      - JWT_SECRET=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3MzI0NjA1NTEsImV4cCI6MTc2Mzk5NjU1MSwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.YTeR6zLCKuOPjz5CYfwxW1gXp_wP1gAnN3qSMJIFQFg
+      - MONGODB_URI=mongodb://root:admin@mongo:27017/chatApp?authSource=admin
+      - JWT_SECRET=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMy42MC4yMzguMjIxIiwiaWF0IjoxNzQyMjAxMjc0LCJleHAiOjE3NzM3MzcyNzUsImF1ZCI6IiIsInN1YiI6IiIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.mDI6dx7dsE4lJ39PqI36Dr_u324N08wrgBHzMJmMBWE
     networks:
-      - chat-network
+      - chatapp_network
 
   mongo:
-    image: iemafzal/mongodb:v1
+    image: mongo:latest
+    container_name: mongo
     ports:
       - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=admin
     volumes:
-      - mongodb_data:/data/db
+      - chatpp_data:/data/db
     networks:
-      - chat-network
+      - chatapp_network
 
 networks:
-  chat-network:
+  chatapp_network:
     driver: bridge
 
 volumes:
-  mongodb_data:
+  chatpp_data:
   
