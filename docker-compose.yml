@@ -1,6 +1,7 @@
 services:
   frontend:
-    image: zohaibwarraich/fullstack-chatapp-frontend:latest
+    build:
+      context: ./frontend/
     ports:
       - "80:80"
     depends_on:
@@ -9,7 +10,8 @@ services:
       - chatapp_network
 
   backend:
-    image: zohaibwarraich/fullstack-chatapp-backend:latest
+    build:
+      context: ./backend/
     ports:
       - "5001:5001"
     depends_on:
