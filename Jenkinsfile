@@ -18,10 +18,10 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin'
-                    sh 'docker tag fullstack-chatapp-frontend:latest ${env.USERNAME}/fullstack-chatapp-frontend:latest'
-                    sh 'docker push ${env.USERNAME}/fullstack-chatapp-frontend:latest'
-                    sh 'docker tag fullstack-chatapp-backend:latest ${env.USERNAME}/fullstack-chatapp-backend:latest'
-                    sh 'docker push ${env.USERNAME}/fullstack-chatapp-backend:latest'
+                    sh 'docker tag fullstack-chatapp-frontend:latest ${USERNAME}/fullstack-chatapp-frontend:latest'
+                    sh 'docker push ${USERNAME}/fullstack-chatapp-frontend:latest'
+                    sh 'docker tag fullstack-chatapp-backend:latest ${USERNAME}/fullstack-chatapp-backend:latest'
+                    sh 'docker push ${USERNAME}/fullstack-chatapp-backend:latest'
                     
                 }
                 echo 'Successfully Pushed!'
