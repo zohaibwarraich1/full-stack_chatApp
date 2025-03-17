@@ -29,7 +29,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "docker-compose up -d --force-recreate"
+                sh "docker-compose up -d --always-recreate-deps"
                 echo 'Successfully Deployed!'
             }
         }
