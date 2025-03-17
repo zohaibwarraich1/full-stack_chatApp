@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage("Clean Workspace") {
-            steps {
-                cleanWs()
-            }
-        }
         stage("Clone") {
             steps {
                 git url:"https://github.com/zohaibwarraich1/full-stack_chatApp.git", branch: "main"
