@@ -20,7 +20,7 @@ pipeline {
                     sh 'echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin'
                     sh 'docker tag fullstack-chatapp-frontend:latest zohaibwarraich/fullstack-chatapp-frontend:latest'
                     sh 'docker push zohaibwarraich/fullstack-chatapp-frontend:latest'
-                    sh 'docker tag fullstack-chatapp-frontend:latest zohaibwarraich/fullstack-chatapp-backend:latest'
+                    sh 'docker tag fullstack-chatapp-backend:latest zohaibwarraich/fullstack-chatapp-backend:latest'
                     sh 'docker push zohaibwarraich/fullstack-chatapp-backend:latest'
                     
                 }
